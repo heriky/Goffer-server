@@ -1,4 +1,5 @@
 module.exports = {
+	port: 3000,
 	host:'http://222.25.4.10:3000',
 	appInfo: {
     applicationId: "com.hk.goffer",

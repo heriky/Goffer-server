@@ -72,18 +72,34 @@ app.use((err, req, res, next) => {
 })
 
 // 5.开启监听
-http.createServer(app).listen(3000, () => {
-    console.log('Server is running on port 3000')
+var port = require('./env.config.js').port ;
+http.createServer(app).listen(port || 3000, () => {
+    console.log('Server is running on port '+ (port || 3000))
 });
 
 
-// 6. 开始抓取
+// 6. 开始抓取, 定时任务
+
+require('./clawers/xjtu')() ; //西交大的爬虫
+
+require('./clawers/nwpu')() ; //西工大爬虫
+
+require('./clawers/xidian')()
+
+// 定时任务
+var schedule = require('node-schedule');
+
+var j = schedule.scheduleJob({hour: 23, minute: 0}, function(){
+  require('./clawers/xjtu')() ; //西交大的爬虫
+
+	require('./clawers/nwpu')() ; //西工大爬虫
+
+	require('./clawers/xidian')()
+
+	console.log('Schedule Job executed!')
+
+});
 
 
-// require('./clawers/xjtu')() ; //西交大的爬虫
-
-// require('./clawers/nwpu')() ; //西工大爬虫
-
-// require('./clawers/xidian')()
 
 

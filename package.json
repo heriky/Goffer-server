@@ -19,6 +19,7 @@
     "mongoose": "^4.5.9",
     "mongoose-pages": "0.0.3",
     "morgan": "^1.7.0",
+    "node-schedule": "^1.1.1",
     "q": "^1.4.1",
     "superagent": "^1.4.0",
     "superagent-charset": "^1.1.1"
