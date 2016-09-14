@@ -23,8 +23,8 @@ router.get('/offers/all',(req,res)=>{
 
 
 router.get('/offers/popular',(req,res)=>{
-	var pageSize = req.query.p || 10 ;
-	var pageNum = req.query.q || 1 ;
+	var pageSize = parseInt(req.query.p) || 10 ;
+	var pageNum = parseInt(req.query.q) || 1 ;
 	Offer.findPaginated({datetime:{'$gte': Date.now()}},
 		(err,rs)=>{
 			if (err) {return console.log(err)};
@@ -43,11 +43,11 @@ router.get('/offers/schools', (req,res)=>{
 // 按学校查询
 router.get('/offers/school/:id', (req,res)=>{	
 	const id = req.params.id ;
-	const pageSize = req.query.p || 10 ;
-	const pageNum = req.query.q || 1 ;
+	const pageSize = parseInt(req.query.p) || 10 ;
+	const pageNum = parseInt(req.query.q) || 1 ;
 
 	const begin = (pageNum - 1)* pageSize ;
-	const limit = pageSize ;
+	const limit = parseInt(pageSize) ;
 
 	School.findOne({_id:id})
 				.populate({
@@ -64,8 +64,8 @@ router.get('/offers/school/:id', (req,res)=>{
 // 按时间查询
 router.get('/offers/time', (req, res)=>{   
 	const time = req.query.t || Date.now();
-	const pageSize = req.query.p || 10 ;
-	const pageNum = req.query.q || 1 ;
+	const pageSize = parseInt(req.query.p) || 10 ;
+	const pageNum = parseInt(req.query.q) || 1 ;
 
 	Offer.findPaginated({datetime:{$gte: new Date(time)}}, 
 			(err, rs)=>{
@@ -93,7 +93,6 @@ router.get('/offers/',(req,res)=>{
 	const regex = new RegExp(keyword,'i') ; //  这里不能直接用/  / 而要用Regexp()
 	Offer.find({enterprise: regex})
 				.sort({datetime: 1})
-				.limit(30)
 				.exec((err,offers)=>{
 					if (err) {throw err} ;
 					res.json(offers)
