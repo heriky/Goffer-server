@@ -6,7 +6,6 @@ const ep = new Eventproxy() ;
 const C = require('../env.config') ;
 var path = require('path');
 
-const popularSchools = ["西安交大","西工大","西电-太白校区"] ;
 
 // 所有数据
 router.get('/offers/all',(req,res)=>{  
@@ -22,6 +21,7 @@ router.get('/offers/all',(req,res)=>{
 })
 
 
+// 热门数据
 router.get('/offers/popular',(req,res)=>{
 	var pageSize = parseInt(req.query.p) || 10 ;
 	var pageNum = parseInt(req.query.q) || 1 ;
@@ -53,7 +53,7 @@ router.get('/offers/school/:id', (req,res)=>{
 				.populate({
 					path: "offers",
 					match:{datetime: {$gte: Date.now()}},
-					options:{skip:begin,limit:limit,sort:{datetime: 1}}
+					options:{skip:begin,limit:limit,sort:{datetime: 1, pv: -1}}
 				})
 				.exec((err,school)=>{
 					if (err) {throw err} ;
@@ -72,7 +72,7 @@ router.get('/offers/time', (req, res)=>{
 				if (err) {console.log(err); throw err;}
 				res.json(rs.documents)
 			}, pageSize, pageNum)
-		.sort({datetime: 1})
+		.sort({datetime: 1,pv:-1})
 })
 
 //  用户的请求修改数据库，用于统计用户关心程度, 统计pv值

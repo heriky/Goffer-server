@@ -25,8 +25,8 @@ module.exports = function(schoolName,cb){
                       throw err;
                   })
           } else {
-            // 如果该项目是已经存在的，那么可能在offers表中有与该school相关联的项
-            // 初始化的时候，将相关联的offer项全部删除，以填充新的数据
+            // 如果该项目是已经存在的，那么可能在offers表中可能有与该school相关联的项
+            // 初始化的时候，将这些相关联的offer项全部删除，以填充新的数据
           	Offer.remove({school: school._id},err=>{
               if (err) {console.log(err); throw err;}
               cb.call(null,school)

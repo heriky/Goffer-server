@@ -80,11 +80,11 @@ http.createServer(app).listen(port || 3000, () => {
 
 //6. 开始抓取, 定时任务
 
-require('./clawers/xjtu')() ; //西交大的爬虫
+// require('./clawers/xjtu')() ; //西交大的爬虫
 
-require('./clawers/nwpu')() ; //西工大爬虫
+// require('./clawers/nwpu')() ; //西工大爬虫
 
-require('./clawers/xidian')(); // 西电爬虫
+// require('./clawers/xidian')(); // 西电爬虫
 
 require('./clawers/changan')() ; // 长安大学爬虫 
 
