@@ -78,13 +78,15 @@ http.createServer(app).listen(port || 3000, () => {
 });
 
 
-// 6. 开始抓取, 定时任务
+//6. 开始抓取, 定时任务
 
 require('./clawers/xjtu')() ; //西交大的爬虫
 
 require('./clawers/nwpu')() ; //西工大爬虫
 
-require('./clawers/xidian')()
+require('./clawers/xidian')(); // 西电爬虫
+
+require('./clawers/changan')() ; // 长安大学爬虫 
 
 // 定时任务
 var schedule = require('node-schedule');
@@ -94,12 +96,20 @@ var j = schedule.scheduleJob({hour: 23, minute: 0}, function(){
 
 	require('./clawers/nwpu')() ; //西工大爬虫
 
-	require('./clawers/xidian')()
+	require('./clawers/xidian')(); // 西电爬虫
 
-	console.log('Schedule Job executed!')
+	require('./clawers/changan')() ; // 长安大学爬虫 
+
+	console.log('Schedule Job begin to be executed!')
 
 });
 
 
+
+
+
+
+
+	
 
 
