@@ -6,8 +6,8 @@ var schoolName = "长安大学" ;
 // 设置时间范围 -3 ~ +7
 var startDate = new Date() ;
 var endDate = new Date() ;
-startDate = startDate.setDate(new Date().getDate() - 3) ;
-endDate = endDate.setDate(new Date().getDate() + 7);
+startDate = startDate.setDate(new Date().getDate()) ;
+endDate = endDate.setDate(new Date().getDate() + 6);
 
 // 根据日期产生requestUrl
 var requsetUrl = `http://182.254.150.113:88/Frame/Data/jdp.ashx?rnd=${new Date().getTime()}`+
@@ -33,6 +33,7 @@ function fetchAndSaveData(schoolId){
 			var dataIds = [] ; // 记录被插入offer的id值，用于更新school中相应字段
 			
 			var list =  JSON.parse(res.text).rows ;
+			console.log(JSON.parse(res.text).total)
 			list.forEach(item=>{
 				var data = {
 					school: schoolId,
