@@ -54,6 +54,7 @@ function fetchAndSaveData(schoolId){
               // console.log('Offer Saved!')
               // 只在所有offers记录都存储后，所有offer的_id都明确了，再进行school中offers的更新
               dataIds.push(_offer._id) ;
+              console.log(dataIds.length, list.length)
               if (dataIds.length == list.length) {
               	School.update({_id:schoolId},{'$set':{offers: dataIds}})
               		.then(_school=>{})
